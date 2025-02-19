@@ -10,7 +10,7 @@ const createOne = async (req, res) => {
 
 const getAll = async (req, res) => {
   const query = req.query;
-  const limit = query.limit || 9;
+  const limit = query.limit || 1000;
   const page = query.page || 1;
   const skip = (page - 1) * limit;
   const locations = await Location.find({}, { __v: false })

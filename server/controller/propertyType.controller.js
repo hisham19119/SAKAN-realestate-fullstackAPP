@@ -61,7 +61,7 @@ const updateOne = async (req, res) => {
 
     res.status(201).json({
       status: httpStatusText.SUCCESS,
-      data: { updatedType },
+      data: { updatedType: updatedType },
     });
   } catch (err) {
     res.status(400).json({ err });

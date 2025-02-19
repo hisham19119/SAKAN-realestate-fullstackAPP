@@ -6,6 +6,7 @@ const verifyToken = require("../middlewares/verifyToken");
 const propertiesValidators = require("../middlewares/validators/propertyValidator");
 const userRoles = require("../utils/userRoles");
 const upload = require("../middlewares/upload");
+// const uploadToCloudinary = require("../middlewares/upload/uploadToCloudinary");
 
 router
   .route("/")
@@ -13,7 +14,8 @@ router
     verifyToken,
     AllowedTo(userRoles.ADMIN, userRoles.EMPLOYEE),
     // propertiesValidators.createPropertyValidator(),
-    upload.fields([{ name: "image" }, { name: "images" }]),
+    upload.upload.fields([{ name: "image" }, { name: "images" }]),
+    upload.uploadToCloudinary,
     propertyController.createOne
   )
   .get(

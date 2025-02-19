@@ -14,7 +14,10 @@ router
     // userController.createOne
     authController.register
   )
-  .get(verifyToken, AllowedTo(userRoles.ADMIN), userController.getAll);
+  .get(
+    // verifyToken, AllowedTo(userRoles.ADMIN),
+    userController.getAll
+  );
 
 router
   .route("/:id")

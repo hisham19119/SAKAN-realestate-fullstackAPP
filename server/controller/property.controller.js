@@ -16,19 +16,17 @@ const createOne = async (req, res) => {
   } = req.body;
   console.log(req.body);
   const newProperty = new Property({
-    title,
-    description,
-    price,
-    location,
-    image: req.files.image ? req.files.image[0].filename : undefined,
-    images: req.files.images
-      ? req.files.images.map((file) => file.filename)
-      : [],
-    rooms,
-    bathrooms,
-    area,
-    garages,
-    type,
+    title: req.body.title,
+    description: req.body.description,
+    price: req.body.price,
+    location: req.body.location,
+    type: req.body.type,
+    rooms: req.body.rooms,
+    bathrooms: req.body.bathrooms,
+    area: req.body.area,
+    grages: req.body.grages,
+    image: req.files.image ? req.files.image[0] : undefined,
+    images: req.files.images || [],
   });
   await newProperty.save();
   res.json({ status: httpStatusText.SUCCESS, data: { newProperty } });
