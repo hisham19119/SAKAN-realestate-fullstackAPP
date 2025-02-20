@@ -60,7 +60,35 @@ const cors = require("cors");
 
 dbConecction();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+// app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://sakan-realestate-server.vercel.app", // أضف هذا العنوان
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -73,3 +101,7 @@ app.use("/api/locations/", locationRouter);
 app.use("/api/types/", propertyTypeRouter);
 app.use("/api/users/", userRouter);
 app.use("/api/auth/", authRouter);
+
+app.listen(process.env.PORT || 4000, () => {
+  console.log("Server is running...");
+});

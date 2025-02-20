@@ -8,12 +8,12 @@ const userRoles = require("../utils/userRoles");
 const authController = require("../controller/auth.controller");
 router
   .route("/")
-  .post(
-    // AllowedTo(userRoles.ADMIN),
-    // userValidators.createUserValidator,
-    // userController.createOne
-    authController.register
-  )
+  // .post(
+  //   // AllowedTo(userRoles.ADMIN),
+  //   // userValidators.createUserValidator,
+  //   // userController.createOne
+  //   authController.register
+  // )
   .get(
     // verifyToken, AllowedTo(userRoles.ADMIN),
     userController.getAll
