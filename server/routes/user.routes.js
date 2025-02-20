@@ -30,7 +30,7 @@ router
   )
   .delete(verifyToken, AllowedTo(userRoles.ADMIN), userController.deleteOne);
 
-router.route("/login").post(authController.login);
-router.route("/logout").post(authController.logout);
+// router.route("/login").post(authController.login);
+// router.route("/logout").post(authController.logout);
 
 module.exports = router;
